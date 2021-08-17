@@ -7,13 +7,9 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Role role;
+    private Role role = Role.USER;
 
     public enum Role {USER, ADMIN}
-
-    User() {
-
-    }
 
     public User(long id, String username, String email, String password, Role role) {
         this.id = id;

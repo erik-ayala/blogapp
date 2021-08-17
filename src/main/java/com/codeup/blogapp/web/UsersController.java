@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value ="/api/users", headers ="Accept=application/json" )
-public class UserController {
+public class UsersController {
 
     @GetMapping
     private List<User> getUsers() {
