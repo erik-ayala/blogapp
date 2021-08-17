@@ -3,13 +3,17 @@ package com.codeup.blogapp.data;
 import javax.management.relation.Role;
 
 public class User {
-    long id;
-    String username;
-    String email;
-    String password;
-    Role role;
+    private long id;
+    private String username;
+    private String email;
+    private String password;
+    private Role role;
 
     public enum Role {USER, ADMIN}
+
+    User() {
+
+    }
 
     public User(long id, String username, String email, String password, Role role) {
         this.id = id;
