@@ -32,7 +32,7 @@ export function RegisterEvent(){
 
         let request = {
             method: "POST",
-            header: {"Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(user)
         };
 

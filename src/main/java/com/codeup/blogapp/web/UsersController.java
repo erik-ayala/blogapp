@@ -4,6 +4,8 @@ import com.codeup.blogapp.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.relation.Role;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,23 +16,23 @@ public class UsersController {
     @GetMapping
     private List<User> getUsers() {
         return new ArrayList<>() {{
-            add(new User(28376L, "erik", "erik.com","fgjdjd", User.Role.USER));
+            add(new User(28376L, "erik", "erik.com","fgjdjd", User.Role.USER, null));
         }};
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     private User getUsersByID(@PathVariable Long id) {
         if (id == 1) {
-            return new User(1L, "erik again", "fhe.com", "hfaiehf", User.Role.USER);
+            return new User(1L, "erik again", "fhe.com", "hfaiehf", User.Role.USER, null);
         } else{
             return null;
         }
     }
 
-    @PostMapping("/users")
+    @PostMapping
     private void createUser(@RequestBody User user) { System.out.println(user); }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     private void updateUsers(@PathVariable Long id, @RequestBody User user) {
         System.out.println(id);
         System.out.println(user);
@@ -40,5 +42,27 @@ public class UsersController {
     private void deleteUsers(@PathVariable Long id) {
         System.out.println(id);
     }
+
+    @PostMapping("/findByUsername")
+    private void findByUsername(@RequestParam String username) {
+        System.out.println("Username is: " + username);
+    }
+
+    @PostMapping("/findByEmail")
+    private void findByEmail(@RequestParam String email) {
+        System.out.println("Email is: " + email);
+    }
+
+    @PutMapping({"{id}/updatePassword"})
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword){
+        if(!newPassword.equals(oldPassword)){
+            System.out.println("Password for id: " + id + " has been updated!");
+            System.out.println("Old password: " + oldPassword);
+            System.out.println("New password: " + newPassword);
+        }
+    }
+    
+
 }
+
 
