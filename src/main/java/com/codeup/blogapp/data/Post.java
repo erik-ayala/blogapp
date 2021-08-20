@@ -16,7 +16,15 @@ public class Post {
     @Column(nullable = false)
     private String content;;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "post_category",
+            joinColumns =
+    )
     private Collection<Category> categories;
 
     public Post(Long id, String title, String content,  User user, Collection<Category> categories) {
