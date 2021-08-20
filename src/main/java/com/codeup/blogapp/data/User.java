@@ -1,14 +1,34 @@
 package com.codeup.blogapp.data;
 
 import javax.management.relation.Role;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 
+@Entity
+@Table(name ="users")
 public class User {
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
     private String username;
+
+    @Email
+    @Column(nullable = false)
     private String email;
+
+
+    @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role = Role.USER;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private Collection<Post> posts;
 
     public enum Role {USER, ADMIN}
@@ -22,12 +42,15 @@ public class User {
         this.posts = posts;
 
     }
+    public User() {
+
+    }
 
     public User(String username) {
         this.username = username;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
