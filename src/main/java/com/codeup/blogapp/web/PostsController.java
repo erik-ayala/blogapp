@@ -4,8 +4,8 @@ import com.codeup.blogapp.data.Post;
 import com.codeup.blogapp.data.PostsRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
@@ -23,8 +23,8 @@ public class PostsController {
     }
 
     @GetMapping("{id}")
-    private Post getPostById(@PathVariable Long id) {
-        return postsRepository.getById(id);
+    private Optional<Post> getPostById(@PathVariable Long id) {
+        return postsRepository.findById(id);
     }
 
     @PostMapping
