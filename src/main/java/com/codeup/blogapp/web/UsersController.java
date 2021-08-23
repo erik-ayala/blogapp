@@ -1,6 +1,7 @@
 package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.User;
+import com.codeup.blogapp.data.UsersRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.management.relation.Role;
@@ -13,6 +14,12 @@ import java.util.List;
 @RequestMapping(value ="/api/users", headers ="Accept=application/json" )
 public class UsersController {
 
+    private UsersRepository usersRepository;
+
+    public UsersController(UsersRepository usersRepository){
+        this.usersRepository = usersRepository;
+
+    }
     @GetMapping
     private List<User> getUsers() {
         return new ArrayList<>() {{

@@ -1,9 +1,12 @@
 package com.codeup.blogapp.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -17,15 +20,18 @@ public class Post {
     private String content;;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany
     @JoinTable(
-            name = "post_category",
-            joinColumns =
+            name="post_category",
+            joinColumns={@JoinColumn(name="post_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
     )
     private Collection<Category> categories;
+
 
     public Post(Long id, String title, String content,  User user, Collection<Category> categories) {
         this.id = id;
@@ -34,6 +40,16 @@ public class Post {
         this.user = user;
         this.categories = categories;
     }
+
+    public Post(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
+
+    public Post() {
+
+    }
+
 
     public Long getId() {
         return id;

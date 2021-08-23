@@ -18,13 +18,16 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Collection<Post> posts;
 
+
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
     }
-    Category(){
+
+    public Category() {
 
     }
+
 
     public Long getId() {
         return id;
