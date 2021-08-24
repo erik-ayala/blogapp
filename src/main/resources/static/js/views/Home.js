@@ -13,3 +13,5 @@ export default function Home(props) {
         </main>
     `;
 }
+
+$('.h1').css("margin", "auto")

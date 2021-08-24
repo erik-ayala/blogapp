@@ -4,17 +4,15 @@ import com.codeup.blogapp.data.User;
 import com.codeup.blogapp.data.UsersRepository;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.Role;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value ="/api/users", headers ="Accept=application/json" )
 public class UsersController {
 
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
     public UsersController(UsersRepository usersRepository){
         this.usersRepository = usersRepository;
@@ -22,9 +20,7 @@ public class UsersController {
     }
     @GetMapping
     private List<User> getUsers() {
-        return new ArrayList<>() {{
-            add(new User(28376L, "erik", "erik.com","fgjdjd", User.Role.USER, null));
-        }};
+        return usersRepository.findAll();
     }
 
     @GetMapping("{id}")
@@ -37,7 +33,7 @@ public class UsersController {
     }
 
     @PostMapping
-    private void createUser(@RequestBody User user) { System.out.println(user); }
+    private void createUser(@RequestBody User user) { usersRepository.save(user); }
 
     @PutMapping("{id}")
     private void updateUsers(@PathVariable Long id, @RequestBody User user) {
@@ -47,7 +43,7 @@ public class UsersController {
 
     @DeleteMapping("/{id}")
     private void deleteUsers(@PathVariable Long id) {
-        System.out.println(id);
+        usersRepository.deleteById(id);
     }
 
     @PostMapping("/findByUsername")

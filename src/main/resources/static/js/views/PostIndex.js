@@ -10,6 +10,7 @@ export default function PostIndex(props) {
         <form>
             <input type="text" id="title">
             <input type="text" id="content">
+
             <button id="create-post-btn" type="button">Add Post</button>
         </form>
         ${props.posts.map(post => `
@@ -52,7 +53,7 @@ export function postEvents() {
 
             let post = {
                 title: $('#title').val(),
-                content: $('#content').val()
+                content: $('#content').val(),
             }
 
             let request = {
@@ -97,7 +98,7 @@ export function postEvents() {
 
         let post = {
             title: $(this).siblings(".edit-title").text(),
-            content: $(this).siblings(".edit-content").text()
+            content: $(this).siblings(".edit-content").text(),
         }
 
         let request = {

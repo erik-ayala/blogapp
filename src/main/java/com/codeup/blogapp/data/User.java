@@ -1,6 +1,6 @@
 package com.codeup.blogapp.data;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -22,15 +22,15 @@ public class User {
     private String email;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private Role role = Role.USER;
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+    @JsonIgnoreProperties("user")
     private Collection<Post> posts;
 
     public enum Role {USER, ADMIN}
