@@ -2,6 +2,7 @@ package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.Post;
 import com.codeup.blogapp.data.PostsRepository;
+import com.codeup.blogapp.services.EmailService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class PostsController {
 
     private final PostsRepository postsRepository;
+    private final EmailService emailService;
 
 
 
-    public PostsController(PostsRepository postsRepository) {
+    public PostsController(PostsRepository postsRepository, EmailService emailService) {
         this.postsRepository = postsRepository;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -32,6 +35,7 @@ public class PostsController {
     @PostMapping
     private void createPost(@RequestBody Post post) {
         postsRepository.save(post);
+        emailService.prepareAndSend(post, "Test Subject", "Test Body");
     }
 
     @PutMapping("/{id}")
