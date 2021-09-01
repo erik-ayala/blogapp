@@ -40,7 +40,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param headers HttpHeaders
      * @param status  HttpStatus
      * @param request WebRequest
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(
@@ -58,7 +58,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param headers HttpHeaders
      * @param status  HttpStatus
      * @param request WebRequest
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(
@@ -80,7 +80,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param headers HttpHeaders
      * @param status  HttpStatus
      * @param request WebRequest
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -102,7 +102,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param headers HttpHeaders
      * @param status  HttpStatus
      * @param request WebRequest
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -119,7 +119,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @param headers HttpHeaders
      * @param status  HttpStatus
      * @param request WebRequest
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -140,7 +140,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * Handles javax.validation.ConstraintViolationException. Thrown when @Validated fails.
      *
      * @param ex the ConstraintViolationException
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @ExceptionHandler(ConstraintViolationException.class)
     protected ResponseEntity<Object> handleConstraintViolation(
@@ -155,7 +155,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * Handles EntityNotFoundException. Created to encapsulate errors with more detail than javax.persistence.EntityNotFoundException.
      *
      * @param ex the EntityNotFoundException
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(
@@ -177,7 +177,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * Handle DataIntegrityViolationException, inspects the cause for different DB causes.
      *
      * @param ex the DataIntegrityViolationException
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex,
@@ -192,7 +192,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * Handle Exception, handle generic Exception.class
      *
      * @param ex the Exception
-     * @return the ApiError object
+     * @return the ApiError.java object
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,

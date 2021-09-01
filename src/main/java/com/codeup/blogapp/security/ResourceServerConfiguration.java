@@ -1,7 +1,8 @@
 package com.codeup.blogapp.security;
 
-import com.example.restblog.errors.CustomAccessDeniedHandler;
-import com.example.restblog.errors.CustomAuthenticationEntryPoint;
+import com.codeup.blogapp.errors.CustomAccessDeniedHandler;
+import com.codeup.blogapp.errors.CustomAuthenticationEntryPoint;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,11 +34,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .authorizeRequests()
-                .antMatchers("/**", "/api/posts", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-            .and()
-                .authorizeRequests()
                 .antMatchers("/api/users/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/api/posts/**").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/api/**").authenticated()
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());
